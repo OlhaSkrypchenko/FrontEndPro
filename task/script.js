@@ -1,5 +1,5 @@
 let login = prompt('Enter your login', '');
-let loginRegexp = /^[A-Z][A-Za-z]+[\d]{2}$/;
+let loginRegexp = /^[A-Z]\w+[\d]{2}$/;
 
 console.log(loginRegexp.test(login));
 
