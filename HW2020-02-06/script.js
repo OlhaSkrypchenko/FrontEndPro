@@ -35,14 +35,14 @@ for (let i = 0; i < 1; i++) {
     } else {
         break;
     }
-  }
-  
+	}
+	
+	let draw = userStep === computerStep;
+	
   let win = (userStep === stone && computerStep === scissors) 
             || (userStep === scissors && computerStep === paper)
             || (userStep === paper && computerStep === stone);
   
-	let draw = userStep === computerStep;
-	
   switch(true) {
     case win: 
       confirmation = confirm(`Your step was ${userStep}, computer step was ${computerStep}.
