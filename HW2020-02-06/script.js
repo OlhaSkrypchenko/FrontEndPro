@@ -7,14 +7,13 @@ let paper = options[2];
 for (let i = 0; i < 1; i++) {
     let confirmation;
     let userScore;
-    let computerScore;
 
     let userStep = prompt('Your turn! Stone, scissors or paper?', '');
 
     if (typeof userStep === 'string') {
         userStep = userStep.toLowerCase();
     } else {
-        confirmation = confirm(`Hmmm...You didn't enter anything
+        confirmation = confirm(`Hmmm...You didn't enter anything...
                                 \nDo you really wanna to continue the game?`);
         if (confirmation) {
             i--;
@@ -38,49 +37,38 @@ for (let i = 0; i < 1; i++) {
     let randomInteger = Math.floor(Math.random() * options.length);
     let computerStep = options[randomInteger];
 
-    if (userStep === stone && computerStep === stone) {
+    let draw = (userStep === stone && computerStep === stone) 
+                || (userStep === scissors && computerStep === scissors)
+                || (userStep === paper && computerStep === paper);
+    
+    let win = (userStep === stone && computerStep === scissors) 
+                || (userStep === scissors && computerStep === paper)
+                || (userStep === paper && computerStep === stone);
+
+    if (draw) {
         userScore = 1;
-        computerScore = 1;
-    } else if (userStep === stone && computerStep === scissors) {
-        userScore = 1;
-        computerScore = 0;
-    } else if (userStep === stone && computerStep === paper) {
-        userScore = 0;
-        computerScore = 1;
-    } else if (userStep === scissors && computerStep === stone) {
-        userScore = 0;
-        computerScore = 1;
-    } else if (userStep === scissors && computerStep === scissors) {
-        userScore = 1;
-        computerScore = 1;
-    } else if (userStep === scissors && computerStep === paper) {
-        userScore = 1;
-        computerScore = 0;
-    } else if (userStep === paper && computerStep === stone) {
-        userScore = 1;
-        computerScore = 0;
-    } else if (userStep === paper && computerStep === scissors) {
-        userScore = 0;
-        computerScore = 1;
-    } else if (userStep === paper && computerStep === paper) {
-        userScore = 1;
-        computerScore = 1;
+    } else if (win) {
+        userScore = 2;
     } else {
-        alert('Smth went wrong!!!');
+        userScore = 0;
     }
 
-    if (userScore > computerScore) {
-        confirmation = confirm(`Your step was ${userStep}, computer step was ${computerStep}.
-                                \nYou win!!!
-                                \nDo you wanna to play the game again?`);
-    } else if (userScore < computerScore) { 
-        confirmation = confirm(`Your step was ${userStep}, computer step was ${computerStep}.
-                                \nYou loose ((
-                                \nDo you wanna to play the game again?`);
-    } else if (userScore === computerScore) {
-        confirmation = confirm(`Your step was ${userStep}, computer step was ${computerStep}.
-                                \nDraw!!!
-                                \nDo you wanna to play the game again?`);
+    switch(userScore) {
+        case 0: 
+            confirmation = confirm(`Your step was ${userStep}, computer step was ${computerStep}.
+                                    \nYou loose ((
+                                    \nDo you wanna to play the game again?`);
+            break;
+        case 1: 
+            confirmation = confirm(`Your step was ${userStep}, computer step was ${computerStep}.
+                                    \nDraw!!!
+                                    \nDo you wanna to play the game again?`);
+            break;
+        case 2: 
+            confirmation = confirm(`Your step was ${userStep}, computer step was ${computerStep}.
+                                    \nYou win!!!
+                                    \nDo you wanna to play the game again?`);
+            break;
     }
 
     if (confirmation) {
