@@ -22,8 +22,9 @@ for (let i = 0; i < 1; i++) {
         }
     }
 
-    if (!(userStep === stone || userStep === scissors || userStep === paper)) {
-        confirmation = confirm(`What did you write? You have just three options! 
+    if (!options.includes(userStep)) {
+        confirmation = confirm(`What did you write? You have just three options:
+                                \nstone, scissors or paper! 
                                 \nDo you wanna to continue the game?`);
         if (confirmation) {
             i--;
@@ -32,7 +33,7 @@ for (let i = 0; i < 1; i++) {
             break;
         }
     }
-
+    
     let randomInteger = Math.floor(Math.random() * options.length);
     let computerStep = options[randomInteger];
 
