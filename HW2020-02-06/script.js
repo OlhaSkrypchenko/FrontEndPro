@@ -16,19 +16,38 @@ let randomInteger = Math.floor(Math.random() * options.length);
 
 let computerStep = options[randomInteger]; */
 
-let userScore;
-let computerScore;
-
 
 
 for (let i = 0; i < 1; i++) {
-    let userStep = prompt('Your turn!Stone, scissors or paper?', '');
+    let confirmation;
+    let userScore;
+    let computerScore;
+
+    let userStep = prompt('Your turn! Stone, scissors or paper?', '');
 
     if (typeof userStep === 'string') {
         userStep = userStep.toLowerCase();
     } else {
-        alert('What did you write? You have just three options!');
-        i++;
+        alert('Try again');
+        confirmation = confirm('Do you wanna to continue the game?');
+        if (confirmation) {
+            i--;
+            continue;
+        } else {
+            break;
+        }
+        
+    }
+
+    if (!(userStep === stone || userStep === scissors || userStep === paper)) {
+        alert('What did you write? You have just three options! Try again');
+        confirmation = confirm('Do you wanna to continue the game?');
+        if (confirmation) {
+            i--;
+            continue;
+        } else {
+            break;
+        }
     }
 
     let randomInteger = Math.floor(Math.random() * options.length);
@@ -65,7 +84,6 @@ for (let i = 0; i < 1; i++) {
         alert('Smth got wrong!!!');
     }
 
-
     if (userScore > computerScore) {
         alert (`Your step was ${userStep}, computer step was ${computerStep}. You win`);
     } else if (userScore < computerScore) { 
@@ -74,11 +92,9 @@ for (let i = 0; i < 1; i++) {
         alert (`Your step was ${userStep}, computer step was ${computerStep}. Draw`)
     }
 
-    let confirmation = confirm('Do you wanna to continue the game?');
-
+    confirmation = confirm('Do you wanna to continue the game?');
+    
     if (confirmation) {
         i--;
     }
-
-
 }
