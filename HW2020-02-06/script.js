@@ -3,20 +3,6 @@ let options = ['stone','scissors', 'paper'];
 let stone = options[0];
 let scissors = options[1];
 let paper = options[2];
-/* 
-let userStep = prompt('Your turn!Stone, scissors or paper?', '');
-
-if (typeof userStep === 'string') {
-    userStep = userStep.toLowerCase();
-} else {
-    alert('What did you write? You have just three options!');
-}
-
-let randomInteger = Math.floor(Math.random() * options.length);
-
-let computerStep = options[randomInteger]; */
-
-
 
 for (let i = 0; i < 1; i++) {
     let confirmation;
@@ -28,20 +14,19 @@ for (let i = 0; i < 1; i++) {
     if (typeof userStep === 'string') {
         userStep = userStep.toLowerCase();
     } else {
-        alert('Try again');
-        confirmation = confirm('Do you wanna to continue the game?');
+        confirmation = confirm(`Hmmm...You didn't enter anything
+                                \nDo you really wanna to continue the game?`);
         if (confirmation) {
             i--;
             continue;
         } else {
             break;
         }
-        
     }
 
     if (!(userStep === stone || userStep === scissors || userStep === paper)) {
-        alert('What did you write? You have just three options! Try again');
-        confirmation = confirm('Do you wanna to continue the game?');
+        confirmation = confirm(`What did you write? You have just three options! 
+                                \nDo you wanna to continue the game?`);
         if (confirmation) {
             i--;
             continue;
@@ -81,19 +66,23 @@ for (let i = 0; i < 1; i++) {
         userScore = 1;
         computerScore = 1;
     } else {
-        alert('Smth got wrong!!!');
+        alert('Smth went wrong!!!');
     }
 
     if (userScore > computerScore) {
-        alert (`Your step was ${userStep}, computer step was ${computerStep}. You win`);
+        confirmation = confirm(`Your step was ${userStep}, computer step was ${computerStep}.
+                                \nYou win!!!
+                                \nDo you wanna to play the game again?`);
     } else if (userScore < computerScore) { 
-        alert (`Your step was ${userStep}, computer step was ${computerStep}. You loose`);
+        confirmation = confirm(`Your step was ${userStep}, computer step was ${computerStep}.
+                                \nYou loose ((
+                                \nDo you wanna to play the game again?`);
     } else if (userScore === computerScore) {
-        alert (`Your step was ${userStep}, computer step was ${computerStep}. Draw`)
+        confirmation = confirm(`Your step was ${userStep}, computer step was ${computerStep}.
+                                \nDraw!!!
+                                \nDo you wanna to play the game again?`);
     }
 
-    confirmation = confirm('Do you wanna to continue the game?');
-    
     if (confirmation) {
         i--;
     }
