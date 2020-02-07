@@ -6,7 +6,6 @@ let paper = options[2];
 
 for (let i = 0; i < 1; i++) {
     let confirmation;
-    let userScore;
 
     let userStep = prompt('Your turn! Stone, scissors or paper?', '');
 
@@ -45,30 +44,18 @@ for (let i = 0; i < 1; i++) {
                 || (userStep === scissors && computerStep === paper)
                 || (userStep === paper && computerStep === stone);
 
-    if (draw) {
-        userScore = 1;
-    } else if (win) {
-        userScore = 2;
+    if (win) {
+        confirmation = confirm(`Your step was ${userStep}, computer step was ${computerStep}.
+                                \nYou win!!!
+                                \nDo you wanna to play the game again?`);
+    } else if (draw) {
+        confirmation = confirm(`Your step was ${userStep}, computer step was ${computerStep}.
+                                \nDraw!!!
+                                \nDo you wanna to play the game again?`);
     } else {
-        userScore = 0;
-    }
-
-    switch(userScore) {
-        case 0: 
-            confirmation = confirm(`Your step was ${userStep}, computer step was ${computerStep}.
-                                    \nYou loose ((
-                                    \nDo you wanna to play the game again?`);
-            break;
-        case 1: 
-            confirmation = confirm(`Your step was ${userStep}, computer step was ${computerStep}.
-                                    \nDraw!!!
-                                    \nDo you wanna to play the game again?`);
-            break;
-        case 2: 
-            confirmation = confirm(`Your step was ${userStep}, computer step was ${computerStep}.
-                                    \nYou win!!!
-                                    \nDo you wanna to play the game again?`);
-            break;
+        confirmation = confirm(`Your step was ${userStep}, computer step was ${computerStep}.
+                                \nYou loose ((
+                                \nDo you wanna to play the game again?`);
     }
 
     if (confirmation) {
