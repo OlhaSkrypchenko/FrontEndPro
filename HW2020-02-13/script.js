@@ -1,4 +1,4 @@
-//SOLUTION 2
+//SOLUTION 1
 function compareArr(arr1, arr2) {
     let result = [];
     
