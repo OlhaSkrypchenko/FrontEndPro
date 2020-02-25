@@ -3,7 +3,7 @@ function Student() {
   var teacher = "Petr Kucher";
 
   this.getInfo = function() {
-    console.log(`You study at ${cource} course. Your teacher is ${teacher}`);
+    console.log(`You study at ${cource} cource. Your teacher is ${teacher}`);
   };
 }
 
