@@ -16,9 +16,3 @@ let student2 = new Student();
 student2.read = function() {
   console.log("Congrats!!!You can read.");
 };
-
-student1.getInfo();
-student1.write();
-
-student2.getInfo();
-student2.read();
