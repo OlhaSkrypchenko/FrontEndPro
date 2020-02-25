@@ -2,7 +2,7 @@ function Student() {
   var cource = "Front-End";
   var teacher = "Petr Kucher";
 
-  this.getInfo = function() {
+  Student.prototype.getInfo = function() {
     console.log(`You study at ${cource} cource. Your teacher is ${teacher}`);
   };
 }
