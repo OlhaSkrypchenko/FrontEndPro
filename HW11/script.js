@@ -6,8 +6,10 @@
 3. В третьем конструкторе только статический метод, который создает объекты из конструктора, 
 имя которого указано в параметрах. */
 
-class AncientHuman {
-  constructor() {}
+class Adult {
+  constructor(name) {
+    this.name = name;
+  }
 
   run() {
     console.log("run");
@@ -16,27 +18,28 @@ class AncientHuman {
   go() {
     console.log("go");
   }
+
+  get say() {
+    console.log("say");
+  }
 }
 
-class Human extends AncientHuman {
-  constructor(name) {
-    super();
-    this.name = name;
+class Toddler extends Adult {
+  constructor(options) {
+    super(options);
   }
 
   run() {
-    super.run();
-    console.log("faster");
+    console.log("run slower");
   }
 
   go() {
-    super.go();
-    console.log("longer");
+    console.log("go slower");
   }
 
-  say() {
-    console.log("say");
-  }
+  //   get say() {
+  //     console.log("say");
+  //   }
 }
 
 class Creator {
@@ -47,7 +50,7 @@ class Creator {
   }
 }
 
-let man = Creator.createInstance(Human, "Ivan");
+let child = Creator.createInstance(Toddler, "Ivan");
 
-console.log(man.name);
-man.go();
+console.log(child.name);
+child.say();
