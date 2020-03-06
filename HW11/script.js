@@ -12,15 +12,15 @@ class Adult {
   }
 
   run() {
-    console.log("run");
+    console.log(`${this.name} run`);
   }
 
   go() {
-    console.log("go");
+    console.log(`${this.name} go`);
   }
 
-  get say() {
-    console.log("say");
+  say() {
+    console.log(`${this.name} say`);
   }
 }
 
@@ -30,27 +30,27 @@ class Toddler extends Adult {
   }
 
   run() {
-    console.log("run slower");
+    console.log(`${this.name} run slower`);
   }
 
   go() {
-    console.log("go slower");
+    console.log(`${this.name} go slower`);
   }
 
-  //   get say() {
-  //     console.log("say");
-  //   }
+  say() {
+    return (super.say = undefined);
+  }
 }
 
 class Creator {
   constructor() {}
 
-  static createInstance(creator, options) {
-    return new creator(options);
+  static createInstance(parentClass, options) {
+    return new parentClass(options);
   }
 }
 
 let child = Creator.createInstance(Toddler, "Ivan");
 
-console.log(child.name);
+child.run();
 child.say();
