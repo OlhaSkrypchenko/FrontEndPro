@@ -37,11 +37,18 @@ class Animals extends WatchAnimals {
   }
 
   delete(animalName) {
-    this._zoo.splice(
-      this._zoo.findIndex(item => item.name === animalName),
-      1
-    );
-    super.watchDelete(animalName);
+    let isFinded = this._zoo.findIndex(item => item.name === animalName);
+
+    if (isFinded === -1) {
+      console.log("We don't have such animal in the zoo");
+    } else {
+      let deletedAnimal = this._zoo.splice(isFinded, 1);
+      super.watchDelete(deletedAnimal[0].name);
+    }
+  }
+
+  get zoo() {
+    console.log(this._zoo);
   }
 }
 
@@ -51,4 +58,7 @@ animals.create({ name: "cat" });
 animals.create({ name: "dog" });
 animals.create({ name: "goat" });
 animals.create({ name: "rabbit" });
+animals.zoo;
 animals.delete("goat");
+animals.delete("df");
+animals.zoo;
