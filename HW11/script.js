@@ -30,6 +30,10 @@ class Toddler extends Adult {
   go() {
     console.log(`${this.name} go slower`);
   }
+
+  get say() {
+    return undefined;
+  }
 }
 
 class Creator {
