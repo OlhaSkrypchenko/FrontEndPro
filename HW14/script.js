@@ -6,7 +6,12 @@ class Creature {
     this.list = list;
   }
 
-  add(creature) {
+  create(name) {
+    return { name };
+  }
+
+  add(name) {
+    let creature = this.create(name);
     this.list.unshift(creature);
     this.handleShowCreature(creature.name, "was added", this.list);
   }
@@ -29,11 +34,6 @@ class Human extends Creature {
   constructor(view, list) {
     super(view, list);
   }
-
-  add(people) {
-    this.list.unshift(people);
-    this.handleShowCreature(people.name, "was added", this.list);
-  }
 }
 
 class Animal extends Creature {
@@ -41,7 +41,8 @@ class Animal extends Creature {
     super(view, list);
   }
 
-  add(animal) {
+  add(name) {
+    let animal = super.create(name);
     this.list.push(animal);
     this.handleShowCreature(animal.name, "was added", this.list);
   }
@@ -80,10 +81,10 @@ let humanController = new CreatureController(humanModel);
 let animalModel = new Animal(view, creatures);
 let animalController = new CreatureController(animalModel);
 
-humanController.handleAdd({ name: "John" });
-humanController.handleAdd({ name: "Adam" });
+humanController.handleAdd("John");
+humanController.handleAdd("Adam");
 humanController.handleDelete("John");
 
-animalController.handleAdd({ name: "tiger" });
-animalController.handleAdd({ name: "hippo" });
+animalController.handleAdd("tiger");
+animalController.handleAdd("hippo");
 animalController.handleDelete("tiger");
