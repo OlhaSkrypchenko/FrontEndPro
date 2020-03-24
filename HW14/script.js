@@ -1,5 +1,10 @@
 "use strict";
 
+const creatureTypes = {
+  human: "human",
+  animal: "animal"
+};
+
 class Creature {
   constructor(view, list) {
     this.view = view;
@@ -16,11 +21,13 @@ class Creature {
     this.handleShowCreature(creature.name, "was added", this.list);
   }
 
-  delete(name) {
-    let isFinded = this.list.findIndex(el => el.name === name);
+  delete(name, type) {
+    let isFinded = this.list.findIndex(
+      el => el.name === name && el.type === type
+    );
     if (isFinded >= 0) {
       this.list.splice(isFinded, 1);
-      this.handleShowCreature(name, "was deleted", this.list);
+      this.handleShowCreature(name, `- ${type} was deleted`, this.list);
     }
   }
 
@@ -34,6 +41,10 @@ class Human extends Creature {
   constructor(view, list) {
     super(view, list);
   }
+
+  create(name) {
+    return { ...super.create(name), type: creatureTypes.human };
+  }
 }
 
 class Animal extends Creature {
@@ -41,8 +52,12 @@ class Animal extends Creature {
     super(view, list);
   }
 
+  create(name) {
+    return { ...super.create(name), type: creatureTypes.animal };
+  }
+
   add(name) {
-    let animal = super.create(name);
+    let animal = this.create(name);
     this.list.push(animal);
     this.handleShowCreature(animal.name, "was added", this.list);
   }
@@ -59,8 +74,9 @@ class CreatureView {
 }
 
 class CreatureController {
-  constructor(model) {
+  constructor(model, type) {
     this.model = model;
+    this.type = type;
   }
 
   handleAdd(creature) {
@@ -68,7 +84,7 @@ class CreatureController {
   }
 
   handleDelete(name) {
-    this.model.delete(name);
+    this.model.delete(name, this.type);
   }
 }
 
@@ -76,15 +92,18 @@ let creatures = [];
 
 let view = new CreatureView();
 let humanModel = new Human(view, creatures);
-let humanController = new CreatureController(humanModel);
+let humanController = new CreatureController(humanModel, creatureTypes.human);
 
 let animalModel = new Animal(view, creatures);
-let animalController = new CreatureController(animalModel);
+let animalController = new CreatureController(
+  animalModel,
+  creatureTypes.animal
+);
 
 humanController.handleAdd("John");
 humanController.handleAdd("Adam");
 humanController.handleDelete("John");
 
-animalController.handleAdd("tiger");
-animalController.handleAdd("hippo");
-animalController.handleDelete("tiger");
+animalController.handleAdd("John");
+animalController.handleAdd("Fluffy");
+animalController.handleDelete("John");
