@@ -120,21 +120,14 @@ function createListSection(title, data) {
   return section;
 }
 
-function createApp(data) {
-  const app = document.createElement("div");
-  app.classList.add("app");
+function render(data) {
+  const app = document.body.querySelector(".app");
   app.append(
     createMainTitle(data.title),
     createParagraph(data.text),
     createTable(data.table.caption, data.table.columns, data.table.data),
     createListSection(data.list.title, data.list.data)
   );
-
-  return app;
-}
-
-function render(data) {
-  document.body.prepend(createApp(data));
 }
 
 render(data);
