@@ -1,0 +1,63 @@
+body {
+  font-family: "Times New Roman", serif;
+}
+
+.app {
+  max-width: 694px;
+  margin: 0 auto;
+}
+
+.c-form {
+  padding: 0 55px 0 39px;
+}
+
+.c-title {
+  font-size: 2.2em;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+}
+
+.c-text {
+  font-size: 1em;
+  font-style: italic;
+  margin: 0.4em 0;
+}
+
+.c-mark {
+  color: #a0382d;
+}
+
+.c-fieldset {
+  margin: 16px 0;
+  padding: 10px 15px;
+}
+
+.l-row {
+  padding: 6px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.c-label {
+  width: 95px;
+}
+
+.l-checkbox {
+  width: 95px;
+  margin-right: 35px;
+  margin: 5px 35px 5px 0;
+}
+
+.c-input,
+.c-select,
+.c-textarea {
+  box-sizing: border-box;
+  width: 250px;
+  margin-left: 30px;
+  background-color: #fff;
+}
+
+.c-button {
+  padding: 10px 7px;
+}
