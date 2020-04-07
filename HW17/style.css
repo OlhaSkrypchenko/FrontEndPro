@@ -58,9 +58,10 @@ body {
   padding: 8px 10px;
 }
 
-.c-button--delete {
+.c-button--delete,
+.c-button--edit {
   padding: 8px 10px;
-  margin: 0;
+  margin: 0 15px;
 }
 
 ul {
