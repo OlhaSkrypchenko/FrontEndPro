@@ -3,9 +3,9 @@ import {
   appendChild,
   getElement,
   appendChildren,
-} from "./reusableFunctions";
+} from "../reusable/reusableFunctions";
 
-import { createButton, createInputRow } from "./elements";
+import { createButton, createInputRow } from "../reusable/elements";
 
 export class ListView {
   constructor() {

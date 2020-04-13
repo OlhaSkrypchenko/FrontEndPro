@@ -1,10 +1,10 @@
 import {
   createBasicElement,
   appendChild,
-  getElement
-} from "./reusableFunctions";
+  getElement,
+} from "../reusable/reusableFunctions";
 
-import { createMark, createButton, createInputRow } from "./elements";
+import { createMark, createButton, createInputRow } from "../reusable/elements";
 
 export class FormView {
   constructor() {}
@@ -13,13 +13,13 @@ export class FormView {
     this.title = createBasicElement({
       element: "h1",
       className: "c-title",
-      children: "Coздать пользователя"
+      children: "Coздать пользователя",
     });
 
     this.header = createBasicElement({
       element: "div",
       className: "l-header",
-      children: this.title
+      children: this.title,
     });
 
     this.nameInputRow = createInputRow({
@@ -29,7 +29,7 @@ export class FormView {
       type: "text",
       name: "name",
       id: "name",
-      required: "required"
+      required: "required",
     });
 
     this.secondNameInputRow = createInputRow({
@@ -39,7 +39,7 @@ export class FormView {
       type: "text",
       name: "secondName",
       id: "secondName",
-      required: "required"
+      required: "required",
     });
 
     this.ageInputRow = createInputRow({
@@ -51,19 +51,19 @@ export class FormView {
       id: "age",
       min: 1,
       max: 100,
-      required: "required"
+      required: "required",
     });
 
     this.addingButton = createButton({
       type: "submit",
       value: "add",
-      children: "ADD"
+      children: "ADD",
     });
 
     this.showingButton = createButton({
       type: "button",
       value: "show",
-      children: "SHOW"
+      children: "SHOW",
     });
 
     this.content = createBasicElement({
@@ -74,8 +74,8 @@ export class FormView {
         this.secondNameInputRow,
         this.ageInputRow,
         this.addingButton,
-        this.showingButton
-      ]
+        this.showingButton,
+      ],
     });
 
     this.form = createBasicElement({
@@ -84,9 +84,9 @@ export class FormView {
       attributes: {
         action: "#",
         method: "POST",
-        name: "applyingForm"
+        name: "applyingForm",
       },
-      children: [this.header, this.content]
+      children: [this.header, this.content],
     });
 
     this.app = getElement(".app");
@@ -102,7 +102,7 @@ export class FormView {
     return {
       name: this.nameInput.value,
       secondName: this.secondNameInput.value,
-      age: this.ageInput.value
+      age: this.ageInput.value,
     };
   }
 
@@ -113,7 +113,7 @@ export class FormView {
   }
 
   bindAddUser(handler) {
-    this.form.addEventListener("submit", event => {
+    this.form.addEventListener("submit", (event) => {
       event.preventDefault();
 
       if (this._inputValues) {

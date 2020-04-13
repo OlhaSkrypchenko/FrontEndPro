@@ -1,15 +1,22 @@
 "use strict";
 
-import { Model } from "./script/model";
+import { FormModel } from "./script/formMV/formModel";
+import { FormView } from "./script/formMV/formView";
+import { FormController } from "./script/formMV/formController";
 
-import { ListView } from "./script/listView";
-import { FormView } from "./script/formView";
+import { ListModel } from "./script/listMV/listModel";
+import { ListView } from "./script/listMV/listView";
+import { ListController } from "./script/listMV/listController";
 
-import { Controller } from "./script/controller";
+import { RoutePage } from "./script/routePage";
 
-const model = new Model();
+const routePage = new RoutePage();
+
+const formModel = new FormModel();
 const formView = new FormView();
-const listView = new ListView();
+const formController = new FormController(formModel, formView, routePage);
+formController.handlerRenderForm();
 
-const controller = new Controller(model, formView, listView);
-controller.handlerRenderForm();
+const listModel = new ListModel();
+const listView = new ListView();
+const listController = new ListController(listModel, listView, routePage);
