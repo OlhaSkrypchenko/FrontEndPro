@@ -1,0 +1,25 @@
+.app {
+  position: relative;
+}
+
+.batman {
+  position: absolute;
+  width: 200px;
+  left: 300px;
+  top: 0;
+}
+
+.superman {
+  position: absolute;
+  width: 340px;
+  right: 300px;
+  top: 0;
+}
+
+.bang {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  transform: scale(2.1);
+}
