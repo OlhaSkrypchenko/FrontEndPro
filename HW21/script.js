@@ -39,7 +39,6 @@ $(document).keydown(function (key) {
     batmanCoodsX - supermanCoodsX > -181.9 &&
     batmanCoodsY - supermanCoodsY < 340
   ) {
-    console.log($bang.width);
     $bang
       .css("left", `${(batmanCoodsX + supermanCoodsX) / 2}px`)
       .css("top", `${(batmanCoodsY + supermanCoodsY) / 2}px`)
