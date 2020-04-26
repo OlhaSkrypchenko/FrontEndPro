@@ -54,8 +54,12 @@ class Controller {
   }
 
   async handleRenderTable(targetCurrency) {
-    const currency = await this.model.getPickedCurrency(targetCurrency);
-    this.view.renderTable(currency);
+    try {
+      const currency = await this.model.getPickedCurrency(targetCurrency);
+      this.view.renderTable(currency);
+    } catch (error) {
+      this.view.renderError();
+    }
   }
 }
 
@@ -105,6 +109,11 @@ class View {
     }
 
     this.table.append(tHeadRow, trow);
+  }
+
+  renderError() {
+    this.table.innerHTML = "";
+    this.table.innerText = "Щось пішло не так. Спробуйте пізніше";
   }
 
   bindPickedCurrency(handler) {
