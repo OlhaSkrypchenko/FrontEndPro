@@ -1,88 +1,124 @@
 "use strict";
 
-const container = document.querySelector(".c-currency-exchange");
-const url = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
-const select = document.querySelector(".c-currency");
-
-//Date
-function getCurrentDate() {
-  const currentDate = new Date();
-  const date = currentDate.getDate();
-  let month = currentDate.getMonth() + 1;
-  const year = currentDate.getFullYear();
-
-  if (month < 10) {
-    month = `0${month}`;
+class Model {
+  constructor() {
+    this.data;
+    this.url =
+      "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
   }
 
-  return `${date}.${month}.${year}`;
-}
-
-function renderDate() {
-  const date = document.querySelector(".c-date");
-  date.innerText = `${getCurrentDate()}`;
-}
-
-renderDate();
-
-// Data
-
-async function getData(url) {
-  const response = await fetch(url);
-  const data = await response.json();
-  return data;
-}
-
-function getCurrency(e) {
-  return e.currentTarget.value.toUpperCase();
-}
-
-function getPickedCurrency(data) {
-  const currency = getCurrency(event);
-  const pickedCurrency = data.filter((elem) => elem.ccy === currency)[0];
-  return pickedCurrency;
-}
-
-function createTable(data) {
-  const table = document.querySelector(".c-table");
-  table.innerHTML = "";
-  const pickedCurrency = getPickedCurrency(data);
-
-  if (typeof pickedCurrency === "undefined") {
-    table.innerText = "Ви не обрали валюту";
-    return;
+  async _fetchData() {
+    const response = await fetch(this.url);
+    return await response.json();
   }
 
-  const name = document.createElement("td");
-  name.innerText = pickedCurrency.ccy;
+  async transformData() {
+    const data = await this._fetchData();
+    return (this.data = data
+      .filter((el) => {
+        if (el.ccy !== "BTC") {
+          return el;
+        }
+      })
+      .map((el) => {
+        let { ccy, buy, sale } = el;
+        return { ccy, buy, sale };
+      }));
+  }
 
-  const buy = document.createElement("td");
-  buy.innerText = parseFloat(pickedCurrency.buy);
+  async getData() {
+    if (this.data) {
+      return this.data;
+    }
+    return this.transformData();
+  }
 
-  const sale = document.createElement("td");
-  sale.innerText = parseFloat(pickedCurrency.sale);
-
-  const trow = document.createElement("tr");
-  trow.append(name, buy, sale);
-
-  const thName = document.createElement("th");
-  thName.innerText = "Валюта";
-  const thBuy = document.createElement("th");
-  thBuy.innerText = "Покупка";
-  const thSale = document.createElement("th");
-  thSale.innerText = "Продажа";
-
-  const tHeadrow = document.createElement("tr");
-  tHeadrow.append(thName, thBuy, thSale);
-
-  table.append(tHeadrow, trow);
+  async getPickedCurrency(currency) {
+    const data = await this.getData();
+    return data.filter((elem) => elem.ccy === currency)[0];
+  }
 }
 
-async function launch(url) {
-  const data = await getData(url);
-  select.addEventListener("click", () => {
-    createTable(data);
-  });
+class Controller {
+  constructor(model, view) {
+    this.model = model;
+    this.view = view;
+
+    this.handleRenderDate();
+
+    this.view.bindPickedCurrency(this.handleRenderTable.bind(this));
+  }
+
+  handleRenderDate() {
+    this.view.renderDate();
+  }
+
+  async handleRenderTable(targetCurrency) {
+    const currency = await this.model.getPickedCurrency(targetCurrency);
+    this.view.renderTable(currency);
+  }
 }
 
-launch(url);
+class View {
+  constructor() {
+    this.table = document.querySelector(".c-table");
+    this.select = document.querySelector(".c-currency");
+  }
+
+  _getCurrentDate() {
+    const currentDate = new Date();
+    const date = currentDate.getDate();
+    let month = currentDate.getMonth() + 1;
+    const year = currentDate.getFullYear();
+
+    if (month < 10) {
+      month = `0${month}`;
+    }
+
+    return `${date}.${month}.${year}`;
+  }
+
+  renderDate() {
+    const date = document.querySelector(".c-date");
+    date.innerText = `${this._getCurrentDate()}`;
+  }
+
+  renderTable(data) {
+    this.table.innerHTML = "";
+
+    if (typeof data === "undefined") {
+      this.table.innerText = "Ви не обрали валюту";
+      return;
+    }
+
+    const tHeadRow = document.createElement("tr");
+    const trow = document.createElement("tr");
+
+    for (let key in data) {
+      const th = document.createElement("th");
+      th.innerText = key === "ccy" ? "currency" : key;
+      tHeadRow.append(th);
+
+      const td = document.createElement("td");
+      td.innerText = data[key];
+      trow.append(td);
+    }
+
+    this.table.append(tHeadRow, trow);
+  }
+
+  bindPickedCurrency(handler) {
+    this.select.addEventListener("click", (event) => {
+      const pickedCurrency = event.currentTarget.value.toUpperCase();
+      handler(pickedCurrency);
+    });
+  }
+}
+
+function launch() {
+  const model = new Model();
+  const view = new View();
+  const controller = new Controller(model, view);
+}
+
+launch();

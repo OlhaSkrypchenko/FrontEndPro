@@ -35,11 +35,15 @@ body {
   background-color: rgb(177, 240, 168);
 }
 
-table,
 tr,
 th,
 td {
   border: 1px solid #000;
   border-collapse: separate;
+  text-align: center;
+}
+
+table {
+  width: 100%;
   text-align: center;
 }
