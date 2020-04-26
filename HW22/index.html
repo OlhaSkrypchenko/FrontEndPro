@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Currency exchange</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <div class="c-currency-exchange">
+        <label for="currency" class="c-label">
+          Курс валют на
+          <span class="c-date"></span>
+        </label>
+        <select name="currency" id="currency" class="c-currency">
+          <option value="empty">оберіть валюту</option>
+          <option value="rur">курс російського рубля</option>
+          <option value="usd">курс долара</option>
+          <option value="eur">курс євро</option>
+        </select>
+        <table class="c-table"></table>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

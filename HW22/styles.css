@@ -1,0 +1,45 @@
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1em;
+}
+
+.app {
+  max-width: 250px;
+}
+
+.c-currency-exchange {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 5px;
+  min-height: 170px;
+}
+
+.c-label {
+  font-weight: bold;
+}
+
+.c-currency {
+  width: 100%;
+  margin: 15px 0;
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 5px;
+  outline: none;
+}
+
+.c-currency:focus {
+  border-color: rgb(38, 185, 18);
+  background-color: rgb(177, 240, 168);
+}
+
+table,
+tr,
+th,
+td {
+  border: 1px solid #000;
+  border-collapse: separate;
+  text-align: center;
+}
