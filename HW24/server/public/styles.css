@@ -1,0 +1,15 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1em;
+}
+
+button {
+  padding: 15px;
+  width: 300px;
+}
+
+div {
+  margin: 15px 0;
+  width: 300px;
+  min-height: 500px;
+}
